@@ -27,42 +27,14 @@ public class Driver {
                     desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
                     desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
                     desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
-                    desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 3");
-                    desiredCapabilities.setCapability(MobileCapabilityType.APP, "https://cybertek-appium.s3.amazonaws.com/calculator.apk");
+                    desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel3");
+                    desiredCapabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\ozgei\\IdeaProjects\\OtelzAppium\\src\\test\\resources\\Otelz-dev.apk");
                     try {
                         url = new URL("http://localhost:4723/wd/hub");
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     }
                     driver = new AndroidDriver<>(url, desiredCapabilities);
-                    break;
-                case "android-remote":
-                    DesiredCapabilities caps = new DesiredCapabilities();
-
-                    // Set your access credentials
-                    caps.setCapability("browserstack.user", "testuser_1PhU8f");
-                    caps.setCapability("browserstack.key", "qxU7LUK78o8BK1ki799f");
-
-                    // Set URL of the application under test
-                    caps.setCapability("app", "bs://e0ce6dfd61f8f7d9fd9c4fb11c746b65fd1d79f1");
-
-                    // Specify device and os_version for testing
-                    caps.setCapability("device", "OnePlus 8");
-                    caps.setCapability("os_version", "10.0");
-                    caps.setCapability("realMobile", "true");
-
-                    // Set other BrowserStack capabilities
-                    caps.setCapability("project", "My test appium automation");
-                    caps.setCapability("build", "Java Android");
-                    caps.setCapability("name", "Regression");
-
-                    // Initialise the remote Webdriver using BrowserStack remote URL
-                    // and desired capabilities defined above
-                    try {
-                        driver = new AndroidDriver<>(new URL("http://hub.browserstack.com/wd/hub"), caps);
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    }
                     break;
             }
         }
