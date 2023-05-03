@@ -104,6 +104,7 @@ public class OtelzReservation {
         Assertions.assertTrue(actualHotelPrice.contains(expectedHotelPrice.substring(2)), "The actual string does not contain the expected string");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/btnChooseRoom"))).click();
 
+        swipeV(0.7,0.3);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonCount"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/btnMakeReservation"))).click();
 
@@ -122,6 +123,11 @@ public class OtelzReservation {
 //        driver.closeApp();
 
     }
+    /**
+     * ekranda swipe islemi yapar
+     * @param startPoint yüzde olarak 0, 1 arasi double sayi
+     * @param stopPoint  yüzde olarak 0, 1 arasi double
+     */
     public void swipeH(double startPoint, double stopPoint){
         int w = driver.manage().window().getSize().width;
         int h = driver.manage().window().getSize().height;
@@ -130,6 +136,22 @@ public class OtelzReservation {
                 .press(PointOption.point((int)(w*startPoint), h/2))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
                 .moveTo(PointOption.point((int)(w*stopPoint), h/2))
+                .release()
+                .perform();
+    }
+    /**
+     * ekranda swipe islemi yapar
+     * @param startPoint yüzde olarak 0, 1 arasi double sayi
+     * @param stopPoint  yüzde olarak 0, 1 arasi double
+     */
+    public void swipeV(double startPoint, double stopPoint){
+        int w = driver.manage().window().getSize().width;
+        int h = driver.manage().window().getSize().height;
+
+        new TouchAction<>(driver)
+                .press(PointOption.point(w/2, (int)(h*startPoint)))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(w/2, (int)(h*stopPoint)))
                 .release()
                 .perform();
     }
