@@ -10,6 +10,7 @@ import io.appium.java_client.touch.offset.PointOption;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -111,9 +112,34 @@ public class OtelzReservation {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoName"))).sendKeys("John");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoSurname"))).sendKeys("Doe");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoMail"))).sendKeys("johndoe@gmail.com");
-//        driver.findElements(By.id("com.otelz.mobil:id/textView9"));
-        //swipe left
 
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/etPersonalInfoPhoneCode"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/" +
+                "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/" +
+                "android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget." +
+                "RecyclerView/android.widget.RelativeLayout[1]/android.widget.TextView"))).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoPhone"))).sendKeys("5555555555");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoCountry"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("/hierarchy/android.widget.FrameLayout/android.widget." +
+                "LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget." +
+                "FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android." +
+                "widget.RelativeLayout[1]/android.widget.TextView"))).click();
+
+
+        swipeV(0.5,0.3);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/checkBoxSaveInfo"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/checkBoxIllumination"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/checkBoxPermission"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/btnPersonalInfoNext2"))).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil.reservationSteps:id/tvCouponUse"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil.reservationSteps:id/etCouponCode"))).sendKeys("APP05");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil.reservationSteps:id/button4"))).click();
+        WebElement alertMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+        Assertions.assertTrue(alertMessage.isDisplayed());
         //        MobileElement clearElem = driver.findElement(MobileBy.AccessibilityId("clear"));
 
 //        System.out.println("Text of elem: " + clearElem.getText());
@@ -165,6 +191,6 @@ Android apps otomasyonu için Java ile Maven projesi oluşturulmalı, TestNG(vey
 4.+	İlk çıkan tesisin isim ve fiyat bilgisi alınır ve tesis sayfası açılır
 5.+	Tesis sayfasında tesisin ismi ve fiyatı doğrulanır
 6.+	"Diğer Oda Seçenekleri" butonuna basılır ve bir oda seçilir
-7.	Rezervasyon 1. sayfasında kişi bilgileri girilir ve "Sonraki Adım" butonuna tıklanır
+7.+	Rezervasyon 1. sayfasında kişi bilgileri girilir ve "Sonraki Adım" butonuna tıklanır
 8.	Rezervasyon 2. sayfasında kupon alanı açılır ve "APP05" girilir, kullan butonuna tıklanır ve uyarı mesajı geldiği doğrulanır.
 */
