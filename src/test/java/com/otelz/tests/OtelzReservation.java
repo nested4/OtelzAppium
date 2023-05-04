@@ -10,7 +10,6 @@ import io.appium.java_client.touch.offset.PointOption;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -122,7 +121,16 @@ public class OtelzReservation {
                 "RecyclerView/android.widget.RelativeLayout[1]/android.widget.TextView"))).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoPhone"))).sendKeys("5555555555");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoCountry"))).sendKeys("Turkey"+ Keys.ENTER);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoCountry"))).sendKeys("Turkey");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoCountry"))).click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("/hierarchy/android.widget.FrameLayout/android.widget." +
+//                "LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget." +
+//                "FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android." +
+//                "widget.RelativeLayout[1]/android.widget.TextView\n"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("/hierarchy/android.widget.FrameLayout/android.widget." +
+                "LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget." +
+                "FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android." +
+                "widget.RelativeLayout[4]/android.widget.TextView"))).click();
 
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/checkBoxSaveInfo"))).click();
