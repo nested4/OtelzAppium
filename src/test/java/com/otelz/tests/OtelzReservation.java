@@ -122,7 +122,7 @@ public class OtelzReservation {
                 "RecyclerView/android.widget.RelativeLayout[1]/android.widget.TextView"))).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoPhone"))).sendKeys("5555555555");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoCountry"))).sendKeys("Tur"+ Keys.ENTER);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoCountry"))).sendKeys("Turkey"+ Keys.ENTER);
 
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/checkBoxSaveInfo"))).click();
