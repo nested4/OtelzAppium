@@ -48,52 +48,34 @@ public class OtelzReservation {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/search_src_text"))).sendKeys("Ankara");
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget." +
-                "FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android." +
-                "widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@resource-id=\"com.otelz.mobil.search:id/tvSearchedItem\"])[1]"))).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tv_start_date"))).click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout" +
-                "/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout" +
-                "/android.view.ViewGroup/android.widget.RelativeLayout[1]/androidx.recyclerview.widget.RecyclerView/android." +
-                "widget.LinearLayout[1]/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget." +
-                "LinearLayout[8]/android.widget.TextView"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@resource-id=\"com.otelz.mobil:id/tv_day_number\" and @text=\"8\"]"))).click();
 
-        driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android." +
-                "widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android." +
-                "widget.RelativeLayout[1]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android." +
-                "widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[10]/android.widget." +
-                "TextView")).click();
+        driver.findElement(By.xpath("//*[@resource-id=\"com.otelz.mobil:id/tv_day_number\" and @text=\"10\"]")).click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/" +
-                "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/" +
-                "android.view.ViewGroup/android.widget.RelativeLayout[1]/androidx.recyclerview.widget.RecyclerView/android.widget." +
-                "LinearLayout[2]"))).click();
-
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@resource-id=\"com.otelz.mobil:" +
+                "id/tvCheckDaysAndContinueDates\"]"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/view_search_background"))).click();
 
         System.out.println("Be patient, Test will NOT fail. You are waiting because of a slow server");
-        String expectedHotelName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/" +
-                "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/" +
-                "android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/" +
-                "android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView[1]"))).getAttribute("text");
+//
+        String expectedHotelName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("" +
+                "//*[@resource-id='com.otelz.mobil:id/textView21']"))).getAttribute("text");
         System.out.println("expectedHotelName = " + expectedHotelName);
 
         System.out.println("Be patient, Test will NOT fail. You are waiting because of a slow server");
-        String expectedHotelPrice = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/" +
-                "android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/" +
-                "android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/" +
-                "androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup/" +
-                "android.widget.RelativeLayout/android.widget.TextView[3]"))).getAttribute("text");
+
+        String expectedHotelPrice = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("" +
+                "//*[@resource-id='com.otelz.mobil:id/tvFinalPrice']"))).getAttribute("text");
         System.out.println("expectedHotelPrice = " + expectedHotelPrice);
 
         System.out.println("Be patient, Test will NOT fail. You are waiting because of a slow server");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/" +
-                "android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/" +
-                "android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/" +
-                "androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup/" +
-                "android.widget.RelativeLayout/android.widget.TextView[3]"))).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("" +
+                "//*[@resource-id='com.otelz.mobil:id/textView21']"))).click();
 
         String actualHotelName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/" +
                 "tvFacilityDetailName"))).getAttribute("text");
@@ -101,32 +83,31 @@ public class OtelzReservation {
         String actualHotelPrice = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/" +
                 "tv_best_price_total_price_value"))).getAttribute("text");
         System.out.println("actualHotelPrice = " + actualHotelPrice);
-        Assertions.assertTrue(actualHotelName.contains(expectedHotelName), "The actual string does not contain the expected string");
-        Assertions.assertTrue(actualHotelPrice.contains(expectedHotelPrice.substring(2)), "The actual string does not contain the expected string");
+        Assertions.assertTrue(actualHotelName.contains(expectedHotelName), "The actual string does not contain " +
+                "the expected string");
+        Assertions.assertTrue(actualHotelPrice.contains(expectedHotelPrice.substring(2)), "The actual " +
+                "string does not contain the expected string");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/btnChooseRoom"))).click();
 
         swipeV(0.7, 0.3);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonCount"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/btnMakeReservation"))).click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoName"))).sendKeys("John");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoSurname"))).sendKeys("Doe");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoMail"))).sendKeys("johndoe@gmail.com");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoName")))
+                .sendKeys("John");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoSurname")))
+                .sendKeys("Doe");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoMail")))
+                .sendKeys("johndoe@gmail.com");
 
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/etPersonalInfoPhoneCode"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/" +
-                "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/" +
-                "android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget." +
-                "RecyclerView/android.widget.RelativeLayout[1]/android.widget.TextView"))).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@text='Turkey - 90']"))).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoPhone"))).sendKeys("5555555555");
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoCountry"))).sendKeys("Turkey");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoCountry"))).click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("/hierarchy/android.widget.FrameLayout/android.widget." +
-//                "LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget." +
-//                "FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android." +
-//                "widget.RelativeLayout[1]/android.widget.TextView\n"))).click();
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@text='Turkey']"))).click();
 
 
@@ -141,13 +122,9 @@ public class OtelzReservation {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil.reservationSteps:id/button4"))).click();
         WebElement alertMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
         Assertions.assertTrue(alertMessage.isDisplayed());
-        //        MobileElement clearElem = driver.findElement(MobileBy.AccessibilityId("clear"));
 
-//        System.out.println("Text of elem: " + clearElem.getText());
-//        Assertions.assertTrue(clearElem.isDisplayed());
 
-        //close the app
-//        driver.closeApp();
+        driver.closeApp();
 
     }
 
