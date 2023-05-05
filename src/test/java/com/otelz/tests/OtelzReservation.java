@@ -69,19 +69,19 @@ public class OtelzReservation {
 
         //4.+	İlk çıkan tesisin isim ve fiyat bilgisi alınır ve tesis sayfası açılır
 
-        System.out.println("Be patient, Test will NOT fail. You are waiting because of a slow server");
+        System.out.println("Be patient, Test will NOT fail. You are waiting because of a BUSY server");
 
         String expectedHotelName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("" +
                 "//*[@resource-id='com.otelz.mobil:id/textView21']"))).getAttribute("text");
         System.out.println("expectedHotelName = " + expectedHotelName);
 
-        System.out.println("Be patient, Test will NOT fail. You are waiting because of a slow server");
+        System.out.println("Be patient, Test will NOT fail. You are waiting because of a BUSY server");
 
         String expectedHotelPrice = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("" +
                 "//*[@resource-id='com.otelz.mobil:id/tvFinalPrice']"))).getAttribute("text");
         System.out.println("expectedHotelPrice = " + expectedHotelPrice);
 
-        System.out.println("Be patient, Test will NOT fail. You are waiting because of a slow server");
+        System.out.println("Be patient, Test will NOT fail. You are waiting because of a BUSY server");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("" +
                 "//*[@resource-id='com.otelz.mobil:id/textView21']"))).click();
