@@ -39,6 +39,8 @@ public class OtelzReservation {
         //launch appiumDriver
         driver = new AndroidDriver<MobileElement>(url, caps);
         wait = new WebDriverWait(driver, 30);
+
+        //1.+	Uygulama başlatılır ve tanıtım sayfalarında 2 kere sağa kaydırılır ve devam butonuna tıklanır
         swipeH(0.7, 0.3);
         swipeH(0.7, 0.3);
         driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button")).click();
@@ -46,9 +48,13 @@ public class OtelzReservation {
         driver.findElement(By.id("com.otelz.mobil:id/materialButtonContinue")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tv_search_label"))).click();
 
+        //2.+	Otel sekmesinde "Ankara" girilir ve ilk seçenek seçilir
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/search_src_text"))).sendKeys("Ankara");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@resource-id=\"com.otelz.mobil.search:id/tvSearchedItem\"])[1]"))).click();
+
+        //3.+	Tarih sekmesi açılır ve gidiş tarihi 3, dönüş için 5 gün ilerisi seçilir ve arama butonuna basılır.
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tv_start_date"))).click();
 
@@ -60,8 +66,10 @@ public class OtelzReservation {
                 "id/tvCheckDaysAndContinueDates\"]"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/view_search_background"))).click();
 
+        //4.+	İlk çıkan tesisin isim ve fiyat bilgisi alınır ve tesis sayfası açılır
+
         System.out.println("Be patient, Test will NOT fail. You are waiting because of a slow server");
-//
+
         String expectedHotelName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("" +
                 "//*[@resource-id='com.otelz.mobil:id/textView21']"))).getAttribute("text");
         System.out.println("expectedHotelName = " + expectedHotelName);
@@ -76,6 +84,7 @@ public class OtelzReservation {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("" +
                 "//*[@resource-id='com.otelz.mobil:id/textView21']"))).click();
+        //5.+	Tesis sayfasında tesisin ismi ve fiyatı doğrulanır
 
         String actualHotelName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/" +
                 "tvFacilityDetailName"))).getAttribute("text");
@@ -87,11 +96,15 @@ public class OtelzReservation {
                 "the expected string");
         Assertions.assertTrue(actualHotelPrice.contains(expectedHotelPrice.substring(2)), "The actual " +
                 "string does not contain the expected string");
+        //6.+	"Diğer Oda Seçenekleri" butonuna basılır ve bir oda seçilir
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/btnChooseRoom"))).click();
 
         swipeV(0.7, 0.3);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonCount"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/btnMakeReservation"))).click();
+
+        //7.+	Rezervasyon 1. sayfasında kişi bilgileri girilir ve "Sonraki Adım" butonuna tıklanır
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonalInfoName")))
                 .sendKeys("John");
@@ -117,6 +130,7 @@ public class OtelzReservation {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/checkBoxPermission"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/btnPersonalInfoNext2"))).click();
 
+        //8.	Rezervasyon 2. sayfasında kupon alanı açılır ve "APP05" girilir, kullan butonuna tıklanır ve uyarı mesajı geldiği doğrulanır.
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil.reservationSteps:id/tvCouponUse"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil.reservationSteps:id/etCouponCode"))).sendKeys("APP05");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil.reservationSteps:id/button4"))).click();
