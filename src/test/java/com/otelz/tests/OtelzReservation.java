@@ -28,9 +28,9 @@ public class OtelzReservation {
 
         //DesiredCapabilities
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel3");
+        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 5");
         caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-        caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
+        caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "13.0");
         caps.setCapability(MobileCapabilityType.APP, "C:\\Users\\ozgei\\IdeaProjects\\OtelzAppium\\src\\test\\resources\\Otelz-dev.apk");
 
         //set URL for the appium server
@@ -38,11 +38,11 @@ public class OtelzReservation {
 
         //launch appiumDriver
         driver = new AndroidDriver<MobileElement>(url, caps);
-        wait = new WebDriverWait(driver, 10);
-        swipeH(0.7,0.3);
-        swipeH(0.7,0.3);
+        wait = new WebDriverWait(driver, 30);
+        swipeH(0.7, 0.3);
+        swipeH(0.7, 0.3);
         driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button")).click();
-        swipeH(0.7,0.3);
+        swipeH(0.7, 0.3);
         driver.findElement(By.id("com.otelz.mobil:id/materialButtonContinue")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tv_search_label"))).click();
 
@@ -66,12 +66,12 @@ public class OtelzReservation {
                 "widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[10]/android.widget." +
                 "TextView")).click();
 
-       wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/" +
-               "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/" +
-               "android.view.ViewGroup/android.widget.RelativeLayout[1]/androidx.recyclerview.widget.RecyclerView/android.widget." +
-               "LinearLayout[2]"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/" +
+                "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/" +
+                "android.view.ViewGroup/android.widget.RelativeLayout[1]/androidx.recyclerview.widget.RecyclerView/android.widget." +
+                "LinearLayout[2]"))).click();
 
-       wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/view_search_background"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/view_search_background"))).click();
 
         System.out.println("Be patient, Test will NOT fail. You are waiting because of a slow server");
         String expectedHotelName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/" +
@@ -105,7 +105,7 @@ public class OtelzReservation {
         Assertions.assertTrue(actualHotelPrice.contains(expectedHotelPrice.substring(2)), "The actual string does not contain the expected string");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/btnChooseRoom"))).click();
 
-        swipeV(0.7,0.3);
+        swipeV(0.7, 0.3);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/tvPersonCount"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/btnMakeReservation"))).click();
 
@@ -127,14 +127,11 @@ public class OtelzReservation {
 //                "LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget." +
 //                "FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android." +
 //                "widget.RelativeLayout[1]/android.widget.TextView\n"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("/hierarchy/android.widget.FrameLayout/android.widget." +
-                "LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget." +
-                "FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android." +
-                "widget.RelativeLayout[4]/android.widget.TextView"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@text='Turkey']"))).click();
 
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/checkBoxSaveInfo"))).click();
-        swipeV(0.5,0.3);
+        swipeV(0.5, 0.3);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/checkBoxIllumination"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/checkBoxPermission"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.otelz.mobil:id/btnPersonalInfoNext2"))).click();
@@ -153,35 +150,39 @@ public class OtelzReservation {
 //        driver.closeApp();
 
     }
+
     /**
      * ekranda swipe islemi yapar
+     *
      * @param startPoint yüzde olarak 0, 1 arasi double sayi
      * @param stopPoint  yüzde olarak 0, 1 arasi double
      */
-    public void swipeH(double startPoint, double stopPoint){
+    public void swipeH(double startPoint, double stopPoint) {
         int w = driver.manage().window().getSize().width;
         int h = driver.manage().window().getSize().height;
 
         new TouchAction<>(driver)
-                .press(PointOption.point((int)(w*startPoint), h/2))
+                .press(PointOption.point((int) (w * startPoint), h / 2))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-                .moveTo(PointOption.point((int)(w*stopPoint), h/2))
+                .moveTo(PointOption.point((int) (w * stopPoint), h / 2))
                 .release()
                 .perform();
     }
+
     /**
      * ekranda swipe islemi yapar
+     *
      * @param startPoint yüzde olarak 0, 1 arasi double sayi
      * @param stopPoint  yüzde olarak 0, 1 arasi double
      */
-    public void swipeV(double startPoint, double stopPoint){
+    public void swipeV(double startPoint, double stopPoint) {
         int w = driver.manage().window().getSize().width;
         int h = driver.manage().window().getSize().height;
 
         new TouchAction<>(driver)
-                .press(PointOption.point(w/2, (int)(h*startPoint)))
+                .press(PointOption.point(w / 2, (int) (h * startPoint)))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-                .moveTo(PointOption.point(w/2, (int)(h*stopPoint)))
+                .moveTo(PointOption.point(w / 2, (int) (h * stopPoint)))
                 .release()
                 .perform();
     }
